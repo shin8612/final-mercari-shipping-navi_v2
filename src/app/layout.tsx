@@ -1,9 +1,13 @@
-import './globals.css';
-import type { Metadata } from 'next';
+import "./globals.css";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'メルカリ発送ナビ',
-  description: 'サイズと重さを入力すると最適な発送方法が分かります',
+  title: "メルカリ発送ナビ｜送料と最安配送方法を診断",
+  description:
+    "サイズと重さを入力するだけで、メルカリ発送時に使える配送方法と送料の目安を確認できます。非公式の個人開発ツールです。",
+  verification: {
+    google: "4mfPsiXloyMo4UvTZGjtp-OSfa9lTliLRGTUsZliMWQ",
+  },
 };
 
 export default function RootLayout({
