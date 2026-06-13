@@ -1,7 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { shippingMethods, shippingServices, type ShippingMethod } from "../lib/shippingData";
+import {
+  shippingMethods,
+  shippingServices,
+  type ShippingMethod,
+} from "../lib/shippingData";
 
 type InvalidResult = {
   method: ShippingMethod;
@@ -25,7 +29,9 @@ export default function ShippingNavi() {
   const targetMethods = useMemo(() => {
     return shippingMethods.filter((method) => {
       if (!showOther && method.type !== "mercari") return false;
-      if (serviceFilter !== "all" && method.service !== serviceFilter) return false;
+      if (serviceFilter !== "all" && method.service !== serviceFilter) {
+        return false;
+      }
       return true;
     });
   }, [showOther, serviceFilter]);
@@ -43,8 +49,7 @@ export default function ShippingNavi() {
       const reasons: string[] = [];
 
       if (method.maxWeightGram !== undefined && g > method.maxWeightGram) {
-        const kg = method.maxWeightGram / 1000;
-        reasons.push(`重さ${kg}kg以内`);
+        reasons.push(`重さ${method.maxWeightGram / 1000}kg以内`);
       }
 
       if (method.maxTotalCm !== undefined && totalSize > method.maxTotalCm) {
@@ -212,20 +217,41 @@ export default function ShippingNavi() {
           </section>
         )}
 
-        <section className="mt-8 rounded-3xl bg-gray-50 p-5 text-xs leading-6 text-gray-600">
+        <footer className="mt-10 border-t pt-6 text-xs leading-6 text-gray-500">
           <p>
-            ※本ツールは参考情報です。送料・サイズ条件は最新情報とは限りません。
-            期間限定キャンペーン・送料値引きは反映していません。
+            本サイトは個人開発者が制作した非公式ツールです。
+            株式会社メルカリおよび各配送事業者とは関係ありません。
           </p>
-          <a
-            href="https://help.jp.mercari.com/guide/articles/1080/"
-            target="_blank"
-            rel="noreferrer"
-            className="mt-3 block font-bold text-black underline"
-          >
-            正確な最新情報はメルカリ公式「配送方法 早わかり表」を確認してください
-          </a>
-        </section>
+
+          <p className="mt-2">
+            送料・サイズ条件は変更される場合があります。
+            最新情報はメルカリ公式サイトをご確認ください。
+          </p>
+
+          <p className="mt-2">
+            本ツールは参考情報としてご利用ください。
+            実際の発送前には必ず公式情報をご確認ください。
+          </p>
+
+          <div className="mt-4 flex flex-wrap gap-4">
+            <a
+              href="https://help.jp.mercari.com/guide/articles/1080/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline"
+            >
+              メルカリ公式「配送方法 早わかり表」
+            </a>
+
+            <a href="/about" className="underline">
+              このサイトについて
+            </a>
+          </div>
+
+          <p className="mt-4 text-gray-400">
+            © {new Date().getFullYear()} 個人開発者
+          </p>
+        </footer>
       </div>
     </main>
   );
