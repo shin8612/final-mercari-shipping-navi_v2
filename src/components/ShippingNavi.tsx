@@ -218,40 +218,50 @@ export default function ShippingNavi() {
         )}
 
         <footer className="mt-10 border-t pt-6 text-xs leading-6 text-gray-500">
-          <p>
-            本サイトは個人開発者が制作した非公式ツールです。
-            株式会社メルカリおよび各配送事業者とは関係ありません。
-          </p>
+  <p>
+    本サイトは個人開発者が制作した非公式ツールです。
+    株式会社メルカリおよび各配送事業者とは関係ありません。
+  </p>
 
-          <p className="mt-2">
-            送料・サイズ条件は変更される場合があります。
-            最新情報はメルカリ公式サイトをご確認ください。
-          </p>
+  <p className="mt-2">
+    送料・サイズ条件は変更される場合があります。
+    最新情報は必ず公式サイトをご確認ください。
+  </p>
 
-          <p className="mt-2">
-            本ツールは参考情報としてご利用ください。
-            実際の発送前には必ず公式情報をご確認ください。
-          </p>
+  <p className="mt-2">
+    本ツールは参考情報として提供しています。
+    実際の発送前には公式情報をご確認ください。
+  </p>
 
-          <div className="mt-4 flex flex-wrap gap-4">
-            <a
-              href="https://help.jp.mercari.com/guide/articles/1080/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline"
-            >
-              メルカリ公式「配送方法 早わかり表」
-            </a>
+  <div className="mt-4 flex flex-wrap gap-4">
+    <a
+      href="https://help.jp.mercari.com/guide/articles/1080/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="underline"
+    >
+      メルカリ公式 配送方法早わかり表
+    </a>
 
-            <a href="/about" className="underline">
-              このサイトについて
-            </a>
-          </div>
+    <a
+      href="/about"
+      className="underline"
+    >
+      このサイトについて
+    </a>
 
-          <p className="mt-4 text-gray-400">
-            © {new Date().getFullYear()} 個人開発者
-          </p>
-        </footer>
+    <a
+      href="/privacy"
+      className="underline"
+    >
+      プライバシーポリシー
+    </a>
+  </div>
+
+  <p className="mt-4 text-gray-400">
+    © {new Date().getFullYear()} 個人開発者
+  </p>
+</footer>
       </div>
     </main>
   );
