@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "メルカリ発送ナビ｜送料と最安配送方法を診断",
+  title: "メルカリ発送ナビ（非公式）｜送料と最安配送方法を診断",
   description:
-    "サイズと重さを入力するだけで、使える配送方法と送料の目安を確認できます。",
+    "メルカリ発送時の送料や配送方法を調べられる非公式の個人開発ツールです。",
 };
 
 export default function RootLayout({
@@ -24,6 +24,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
+
       <body>{children}</body>
     </html>
   );

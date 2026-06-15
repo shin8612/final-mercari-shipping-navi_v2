@@ -29,9 +29,7 @@ export default function ShippingNavi() {
   const targetMethods = useMemo(() => {
     return shippingMethods.filter((method) => {
       if (!showOther && method.type !== "mercari") return false;
-      if (serviceFilter !== "all" && method.service !== serviceFilter) {
-        return false;
-      }
+      if (serviceFilter !== "all" && method.service !== serviceFilter) return false;
       return true;
     });
   }, [showOther, serviceFilter]);
@@ -60,16 +58,16 @@ export default function ShippingNavi() {
         .filter((v): v is number => typeof v === "number")
         .sort((a, b) => b - a);
 
-      if (limits.length > 0) {
-        if (limits[0] !== undefined && itemSides[0] > limits[0]) {
-          reasons.push(`長辺${limits[0]}cm以内`);
-        }
-        if (limits[1] !== undefined && itemSides[1] > limits[1]) {
-          reasons.push(`中辺${limits[1]}cm以内`);
-        }
-        if (limits[2] !== undefined && itemSides[2] > limits[2]) {
-          reasons.push(`厚さ${limits[2]}cm以内`);
-        }
+      if (limits[0] !== undefined && itemSides[0] > limits[0]) {
+        reasons.push(`長辺${limits[0]}cm以内`);
+      }
+
+      if (limits[1] !== undefined && itemSides[1] > limits[1]) {
+        reasons.push(`中辺${limits[1]}cm以内`);
+      }
+
+      if (limits[2] !== undefined && itemSides[2] > limits[2]) {
+        reasons.push(`厚さ${limits[2]}cm以内`);
       }
 
       if (reasons.length === 0) {
@@ -92,8 +90,16 @@ export default function ShippingNavi() {
     <main className="min-h-screen bg-white px-4 py-8 text-black">
       <div className="mx-auto max-w-xl">
         <header className="mb-8 text-center">
-          <p className="mb-2 text-sm font-bold text-red-500">メルカリ発送ナビ</p>
-          <h1 className="text-3xl font-black">最安の発送方法を調べる</h1>
+          <p className="mb-2 text-sm font-bold text-red-500">メルカリ便対応</p>
+
+          <h1 className="text-3xl font-black">
+            メルカリ発送ナビ（非公式）
+          </h1>
+
+          <p className="mt-2 text-sm text-gray-500">
+            個人開発による非公式ツール
+          </p>
+
           <p className="mt-4 text-gray-600">
             サイズと重さを入力すると、使える配送方法と送料がわかります。
           </p>
@@ -112,7 +118,10 @@ export default function ShippingNavi() {
 
           <div className="mt-5">
             <label className="block">
-              <span className="mb-2 block font-bold">配送サービスで絞り込み</span>
+              <span className="mb-2 block font-bold">
+                配送サービスで絞り込み
+              </span>
+
               <select
                 value={serviceFilter}
                 onChange={(e) => setServiceFilter(e.target.value)}
@@ -184,7 +193,9 @@ export default function ShippingNavi() {
                     >
                       <div>
                         <p className="font-bold">{method.name}</p>
-                        <p className="text-sm text-gray-500">{method.service}</p>
+                        <p className="text-sm text-gray-500">
+                          {method.service}
+                        </p>
                       </div>
                       <p className="text-xl font-black">{method.price}円</p>
                     </div>
@@ -210,58 +221,59 @@ export default function ShippingNavi() {
               {invalid.slice(0, 8).map(({ method, reasons }) => (
                 <div key={method.id}>
                   <p className="font-bold">{method.name}</p>
-                  <p className="text-sm text-gray-500">{reasons.join("・")}</p>
+                  <p className="text-sm text-gray-500">
+                    {reasons.join("・")}
+                  </p>
                 </div>
               ))}
             </div>
           </section>
         )}
 
-        <footer className="mt-10 border-t pt-6 text-xs leading-6 text-gray-500">
-  <p>
-    本サイトは個人開発者が制作した非公式ツールです。
-    株式会社メルカリおよび各配送事業者とは関係ありません。
-  </p>
+        <footer className="mt-12 border-t pt-6 text-xs leading-6 text-gray-500">
+          <p>
+            本サイトは株式会社メルカリおよび関連会社とは一切関係のない、
+            個人開発による非公式ツールです。
+          </p>
 
-  <p className="mt-2">
-    送料・サイズ条件は変更される場合があります。
-    最新情報は必ず公式サイトをご確認ください。
-  </p>
+          <p className="mt-4">
+            配送方法・送料・サイズ条件は参考情報です。
+            最新の情報や正式な条件については、
+            メルカリ公式サイトをご確認ください。
+          </p>
 
-  <p className="mt-2">
-    本ツールは参考情報として提供しています。
-    実際の発送前には公式情報をご確認ください。
-  </p>
+          <p className="mt-4">
+            本ツールでは期間限定キャンペーン、特別送料、クーポン等は反映していません。
+          </p>
 
-  <div className="mt-4 flex flex-wrap gap-4">
-    <a
-      href="https://help.jp.mercari.com/guide/articles/1080/"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="underline"
-    >
-      メルカリ公式 配送方法早わかり表
-    </a>
+          <p className="mt-4">
+            情報の正確性には努めていますが、内容を保証するものではありません。
+            ご利用は自己責任でお願いいたします。
+          </p>
 
-    <a
-      href="/about"
-      className="underline"
-    >
-      このサイトについて
-    </a>
+          <div className="mt-4 flex flex-wrap gap-4">
+            <a
+              href="https://help.jp.mercari.com/guide/articles/1080/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline"
+            >
+              メルカリ公式 配送方法早わかり表
+            </a>
 
-    <a
-      href="/privacy"
-      className="underline"
-    >
-      プライバシーポリシー
-    </a>
-  </div>
+            <a href="/about" className="underline">
+              このサイトについて
+            </a>
 
-  <p className="mt-4 text-gray-400">
-    © {new Date().getFullYear()} 個人開発者
-  </p>
-</footer>
+            <a href="/privacy" className="underline">
+              プライバシーポリシー
+            </a>
+          </div>
+
+          <p className="mt-4 text-gray-400">
+            © {new Date().getFullYear()} メルカリ発送ナビ（非公式）
+          </p>
+        </footer>
       </div>
     </main>
   );
